@@ -13,7 +13,6 @@ public class Zoo {
     public static void setCages(List<Cage> cages) {
         Zoo.cages = cages;
     }
-
     public static List<Cage> getCages() {
         return cages;
     }
@@ -38,7 +37,7 @@ public class Zoo {
         logger.info(randomAnimal + " animals are created");
 
         for (int i = 0; i < 1; i++){
-            animals.add(new Animals("Animal " + i, 10, 10));
+            animals.add(new Animals("Animal " + i, 2, 2));
         }
 
         return animals;

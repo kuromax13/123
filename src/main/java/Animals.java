@@ -1,9 +1,11 @@
+import java.util.Random;
 import java.util.logging.Logger;
 
 /**
  * Created by Acer on 04.08.2016.
  */
 public class Animals extends AbstractAnimal {
+    Random random = new Random();
     private static Logger logger = Logger.getLogger(Animals.class.getName());
 
     public Animals(String name, int timeToEat, int timeToSleep){
@@ -12,38 +14,52 @@ public class Animals extends AbstractAnimal {
         this.timeToSleep = timeToSleep;
     }
 
-    public void eat(Animals animal, Cage cage) {
-        animal.setTimeToEat(animal.getTimeToEat() + 1);
-        cage.setFoodCapacity(cage.getFoodCapacity() - 1);
+    public Cage emulateAction(Animals animal, Cage cage) {
+        if (animal != null){
+            if (animal.getTimeToEat() < 4){
+                logger.info("It is time to eat !" + animal.getTimeToEat());
+                animal.findFood(animal, cage);
+            } else {
+                animal.move(animal);
+            }
+        } else {
+            logger.warning("This animal is dead");
+        }
+        return cage;
     }
 
-    public void move() {
-        setTimeToEat(getTimeToEat() - 1);
-        setTimeToSleep(getTimeToSleep() - 1);
+    public Animals findFood(Animals animal, Cage cage) {
+        int chanceToFindFood = random.nextInt(10);
+
+        move(animal);
+        if (chanceToFindFood > 9){
+            eat(animal, cage);
+        }
+        return animal;
+    }
+
+    public Animals eat(Animals animal, Cage cage) {
+        int foodToEat = random.nextInt(cage.getFoodCapacity());
+        animal.setTimeToEat(animal.getTimeToEat() + foodToEat);
+        cage.setFoodCapacity(cage.getFoodCapacity() - foodToEat);
+        return animal;
+    }
+
+    public Animals move(Animals animal) {
+        animal.setTimeToEat(getTimeToEat() - 1);
+        animal.setTimeToSleep(getTimeToSleep() - 1);
         logger.info("Lets go for a walk. When to eat = " + getTimeToEat());
         logger.info("Lets go for a walk. When to sleep = " + getTimeToSleep());
 
-        timeToDie();
+        animal = timeToDie(animal);
+        return animal;
     }
 
-    public void findFood(Animals animal, Cage cage) {
-        eat(animal, cage);
-        setTimeToEat(getTimeToEat() + 1);
-    }
-
-    public void timeToDie(){
-        if (getTimeToEat() == 0){
-            System.out.println("Good Bye");
-            System.exit(0);
+    public Animals timeToDie(Animals animal){
+        if (getTimeToEat() <= 0){
+            logger.warning("Animal is dead.");
+            animal.setName("DEAD");
         }
-    }
-
-    public void emulateAction(Animals animal, Cage cage) {
-        if (animal.getTimeToEat() < 4){
-            logger.info("It is time to eat !" + animal.getTimeToEat());
-            animal.findFood(animal, cage);
-        } else {
-            animal.move();
-        }
+        return animal;
     }
 }

@@ -18,11 +18,20 @@ public class Worker {
     }
 
     public void workInCage(Cage cage){
+        int food = 10 - cage.getFoodCapacity(); // 10 - max capacity of the foof in the cage
         if (isEnoughFoodInCage(cage)){
             System.out.println("There is enough food here = " + cage.getFoodCapacity());
         } else {
-            cage.setFoodCapacity(cage.getFoodCapacity() + 2);
+            cage.setFoodCapacity(food);
         }
+    }
+
+    public Cage cleanCage(Cage cage, Animals animal){
+        if (animal == null) {
+            cage.getAnimal().remove(animal);
+        }
+
+        return cage;
     }
 
     public boolean isEnoughFoodInCage(Cage cage){

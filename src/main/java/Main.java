@@ -15,7 +15,7 @@ public class Main {
             logger.info(i + " hour");
 
             for (Cage cage : Zoo.getCages()) {
-//                worker.workInCage(cage);
+                worker.workInCage(cage);
                 emulateAnimals(cage);
             }
         }
@@ -23,11 +23,12 @@ public class Main {
 
     public static Cage emulateAnimals(Cage cage){
         for (Animals animal : cage.getAnimal()) {
-            if (animal != null){
+            if (animal.getAnimalStatus() != AnimalStatus.DEAD){
                 animal.emulateAction(animal, cage);
             } else {
-                worker.cleanCage(cage, animal);
-                cage.getAnimal().remove(animal);
+//                worker.cleanCage(cage, animal);
+//                cage.getAnimal().remove(animal);
+                logger.info("This animal is dead");
             }
         }
         return cage;

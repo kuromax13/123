@@ -27,7 +27,7 @@ public class Worker {
     }
 
     public Cage cleanCage(Cage cage, Animals animal){
-        if (animal == null) {
+        if (animal.getAnimalStatus() == AnimalStatus.DEAD) {
             cage.getAnimal().remove(animal);
         }
 

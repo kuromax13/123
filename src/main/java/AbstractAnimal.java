@@ -5,6 +5,15 @@ public abstract class AbstractAnimal {
     protected String name;
     protected int timeToSleep;
     protected int timeToEat;
+    protected AnimalStatus animalStatus;
+
+    public AnimalStatus getAnimalStatus() {
+        return animalStatus;
+    }
+
+    public void setAnimalStatus(AnimalStatus animalStatus) {
+        this.animalStatus = animalStatus;
+    }
 
     public String getName() {
         return name;

@@ -8,10 +8,11 @@ public class Animals extends AbstractAnimal {
     Random random = new Random();
     private static Logger logger = Logger.getLogger(Animals.class.getName());
 
-    public Animals(String name, int timeToEat, int timeToSleep){
+    public Animals(String name, int timeToEat, int timeToSleep, AnimalStatus animalStatus){
         this.name = name;
         this.timeToEat = timeToEat;
         this.timeToSleep = timeToSleep;
+        this.animalStatus = animalStatus;
     }
 
     public Cage emulateAction(Animals animal, Cage cage) {
@@ -58,7 +59,7 @@ public class Animals extends AbstractAnimal {
     public Animals timeToDie(Animals animal){
         if (getTimeToEat() <= 0){
             logger.warning("Animal is dead.");
-            animal.setName("DEAD");
+            animal.setAnimalStatus(AnimalStatus.DEAD);
         }
         return animal;
     }

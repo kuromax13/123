@@ -37,7 +37,7 @@ public class Zoo {
         logger.info(randomAnimal + " animals are created");
 
         for (int i = 0; i < 1; i++){
-            animals.add(new Animals("Animal " + i, 2, 2));
+            animals.add(new Animals("Animal " + i, 2, 2, AnimalStatus.ALIVE));
         }
 
         return animals;

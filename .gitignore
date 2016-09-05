@@ -1,6 +1,9 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+.iml
+uiDesigner.xml
+workspace.xml
 
 # Folder config file
 Desktop.ini

@@ -1,5 +1,7 @@
+package com.j2core.mrybalkin.week04.ZooEmulator.animals;
+
 /**
- * Created by Acer on 04.08.2016.
+ * Created by mrybalkin on 04.08.2016.
  */
 public abstract class AbstractAnimal {
     protected String name;

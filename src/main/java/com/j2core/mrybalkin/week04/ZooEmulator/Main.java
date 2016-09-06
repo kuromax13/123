@@ -11,16 +11,19 @@ import java.util.logging.Logger;
 
 /**
  * Created by mrybalkin on 04.08.2016.
+ *
+ * Class describes emulating zoo.
  */
 public class Main {
-    protected static final int TIME_TO_EMULATE = 168;
+    private static final int TIME_TO_EMULATE = 168;
 
     private static List<Cage> zoo;
-    private static Worker worker = new Worker("John", 3);
+    private static Worker worker;
     private static Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        zoo = Zoo.createZoo();
+        zoo = Zoo.createZoo();              // create cages with animals
+        worker  = new Worker("John", 3);    //create worker
 
         for(int i = 0; i < TIME_TO_EMULATE; i++) {
             for (Cage cage : zoo) {
@@ -30,6 +33,13 @@ public class Main {
         }
     }
 
+    /**
+     * Makes actions for each animal in the cage.
+     * If animal is dead do nothing
+     *
+     * @param cage - in which cage animals should make actions
+     * @return cage with animals
+     */
     public static Cage emulateAnimals(Cage cage){
         for (Animal animal : cage.getAnimals()) {
             if (animal.getAnimalStatus() != AnimalStatus.DEAD){

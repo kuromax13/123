@@ -46,6 +46,13 @@ public class Animal extends AbstractAnimal {
         return cage;
     }
 
+    /**
+     * Moves an animal. With random probability eats a food
+     *
+     * @param animal - animal to find food
+     * @param cage - cage where animal is
+     * @return animal
+     */
     public Animal findFood(Animal animal, Cage cage) {
         int chanceToFindFood = random.nextInt(10); //10 is like 100%
 
@@ -56,6 +63,13 @@ public class Animal extends AbstractAnimal {
         return animal;
     }
 
+    /**
+     * Adds random number of time to eat and decreases food capacity in the cage.
+     *
+     * @param animal
+     * @param cage
+     * @return
+     */
     public Animal eat(Animal animal, Cage cage) {
         int foodToEat = random.nextInt(cage.getFoodCapacity());
 

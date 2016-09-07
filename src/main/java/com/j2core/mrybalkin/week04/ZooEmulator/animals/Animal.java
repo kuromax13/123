@@ -64,6 +64,7 @@ public class Animal extends AbstractAnimal {
     }
 
     /**
+     * Emulates animal eating.
      * Adds random number of time to eat and decreases food capacity in the cage.
      *
      * @param animal
@@ -79,6 +80,15 @@ public class Animal extends AbstractAnimal {
         return animal;
     }
 
+    /**
+     * Emulates animal moving.
+     *
+     * Decreases animal time to eat and time to sleep.
+     * Check if animal is going to be dead.
+     *
+     * @param animal - animal to move
+     * @return animal after emulating action
+     */
     public Animal move(Animal animal) {
         int sleepingTime = random.nextInt(animal.getTimeToSleep());
         int eatingTime = random.nextInt(animal.getTimeToEat());
@@ -90,17 +100,33 @@ public class Animal extends AbstractAnimal {
         return animal;
     }
 
+    /**
+     * Emulates animal sleeping.
+     *
+     * Sets time to sleep.
+     * Decreases time to eat.
+     *
+     * @param animal - animal to sleep
+     * @return animal after sleeping
+     */
     public Animal sleep(Animal animal){
         int eatingTime = random.nextInt(animal.getTimeToEat());
+        int sleepingTime = random.nextInt(10);  //10 - max value for sleeping. TODO: think how to avoid using number
 
-        animal.setTimeToSleep(10);
+        animal.setTimeToSleep(sleepingTime);
         animal.setTimeToEat(getTimeToEat() - eatingTime);
 
         return animal;
     }
 
+    /**
+     * Check if animal is going to be dead.
+     *
+     * @param animal - animal to check
+     * @return animal with status "DEAD" or "ALIVE"
+     */
     public Animal timeToDie(Animal animal){
-        if (getTimeToEat() <= 0){
+        if (animal.getTimeToEat() <= 0){
             logger.warning("Animal is dead.");
             animal.setAnimalStatus(AnimalStatus.DEAD);
         }

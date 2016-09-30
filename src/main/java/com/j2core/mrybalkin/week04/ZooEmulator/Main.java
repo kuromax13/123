@@ -1,7 +1,7 @@
 package com.j2core.mrybalkin.week04.ZooEmulator;
 
 import com.j2core.mrybalkin.week04.ZooEmulator.animals.AnimalStatus;
-import com.j2core.mrybalkin.week04.ZooEmulator.animals.Animal;
+import com.j2core.mrybalkin.week04.ZooEmulator.animals.Raccoon;
 import com.j2core.mrybalkin.week04.ZooEmulator.zoo.Cage;
 import com.j2core.mrybalkin.week04.ZooEmulator.zoo.Worker;
 import com.j2core.mrybalkin.week04.ZooEmulator.zoo.Zoo;
@@ -41,7 +41,7 @@ public class Main {
      * @return cage with animals
      */
     public static Cage emulateAnimals(Cage cage){
-        for (Animal animal : cage.getAnimals()) {
+        for (Raccoon animal : cage.getAnimals()) {
             if (animal.getAnimalStatus() != AnimalStatus.DEAD){
                 animal.emulateAction(animal, cage);
             } else {

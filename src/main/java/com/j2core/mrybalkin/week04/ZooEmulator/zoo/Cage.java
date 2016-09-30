@@ -1,6 +1,6 @@
 package com.j2core.mrybalkin.week04.ZooEmulator.zoo;
 
-import com.j2core.mrybalkin.week04.ZooEmulator.animals.Animal;
+import com.j2core.mrybalkin.week04.ZooEmulator.animals.Raccoon;
 
 import java.util.List;
 
@@ -11,18 +11,18 @@ import java.util.List;
  */
 public class Cage {
     private int foodCapacity;
-    private List<Animal> animals;
+    private List<Raccoon> animals;
 
-    public Cage(int foodCapacity, List<Animal> animal) {
+    public Cage(int foodCapacity, List<Raccoon> animal) {
         this.foodCapacity = foodCapacity;
         this.animals = animal;
     }
 
-    public List<Animal> getAnimals() {
+    public List<Raccoon> getAnimals() {
         return animals;
     }
 
-    public void setAnimals(List<Animal> animals) {
+    public void setAnimals(List<Raccoon> animals) {
         this.animals = animals;
     }
 

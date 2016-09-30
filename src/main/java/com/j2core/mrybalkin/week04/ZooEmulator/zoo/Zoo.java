@@ -1,7 +1,7 @@
 package com.j2core.mrybalkin.week04.ZooEmulator.zoo;
 
 import com.j2core.mrybalkin.week04.ZooEmulator.animals.AnimalStatus;
-import com.j2core.mrybalkin.week04.ZooEmulator.animals.Animal;
+import com.j2core.mrybalkin.week04.ZooEmulator.animals.Raccoon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +42,14 @@ public class Zoo {
      *
      * @return list of animals
      */
-    public static List<Animal> createAnimals(){
-        List<Animal> animals = new ArrayList<Animal>();
+    public static List<Raccoon> createAnimals(){
+        List<Raccoon> animals = new ArrayList<Raccoon>();
         int randomAnimal = random.nextInt(MAX_ANIMAL_NUMBER_IN_CAGE) + 1;
 
         logger.info(randomAnimal + " animals are created");
 
         for (int i = 0; i < randomAnimal; i++){
-            animals.add(new Animal("Animal " + i, Animal.MIN_TIME_TO_EAT, Animal.MIN_TIME_TO_SLEEP, AnimalStatus.ALIVE));
+            animals.add(new Raccoon("Animal " + i, Raccoon.MIN_TIME_TO_EAT, Raccoon.MIN_TIME_TO_SLEEP, AnimalStatus.ALIVE));
         }
 
         return animals;

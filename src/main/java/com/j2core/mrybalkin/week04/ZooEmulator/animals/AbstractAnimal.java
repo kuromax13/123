@@ -55,34 +55,29 @@ public abstract class AbstractAnimal {
      * Emulates animal eating.
      * Adds random number of time to eat and decreases food capacity in the cage.
      *
-     * @param animal
      * @param cage
      * @return
      */
-    public AbstractAnimal eat(AbstractAnimal animal, Cage cage) {
+    public void eat(Cage cage) {
         int foodToEat = random.nextInt(cage.getFoodCapacity());
 
-        animal.setTimeToEat(animal.getTimeToEat() + foodToEat);
+        this.setTimeToEat(this.getTimeToEat() + foodToEat);
         cage.setFoodCapacity(cage.getFoodCapacity() - foodToEat);
-
-        return animal;
     }
 
     /**
      * Moves an animal. With random probability eats a food
      *
-     * @param animal - animal to find food
      * @param cage - cage where animal is
      * @return animal
      */
-    public AbstractAnimal findFood(AbstractAnimal animal, Cage cage) {
+    public void findFood(Cage cage) {
         int chanceToFindFood = random.nextInt(10); //10 is like 100%
 
-        move(animal);
+        this.move();
         if (chanceToFindFood > CHANCE_TO_FIND_FOOD){
-            eat(animal, cage);
+            this.eat(cage);
         }
-        return animal;
     }
 
     /**
@@ -91,33 +86,27 @@ public abstract class AbstractAnimal {
      * Decreases animal time to eat and time to sleep.
      * Check if animal is going to be dead.
      *
-     * @param animal - animal to move
      * @return animal after emulating action
      */
-    public AbstractAnimal move(AbstractAnimal animal) {
-        int sleepingTime = random.nextInt(animal.getTimeToSleep());
-        int eatingTime = random.nextInt(animal.getTimeToEat());
+    public void move() {
+        int sleepingTime = random.nextInt(this.getTimeToSleep());
+        int eatingTime = random.nextInt(this.getTimeToEat());
 
-        animal.setTimeToEat(getTimeToEat() - eatingTime);
-        animal.setTimeToSleep(getTimeToSleep() - sleepingTime);
-        animal = timeToDie(animal);
-
-        return animal;
+        this.setTimeToEat(getTimeToEat() - eatingTime);
+        this.setTimeToSleep(getTimeToSleep() - sleepingTime);
+        this.timeToDie();
     }
 
     /**
      * Check if animal is going to be dead.
      *
-     * @param animal - animal to check
      * @return animal with status "DEAD" or "ALIVE"
      */
-    public AbstractAnimal timeToDie(AbstractAnimal animal){
-        if (animal.getTimeToEat() <= 0){
+    public void timeToDie(){
+        if (this.getTimeToEat() <= 0){
             logger.warning("Animal is dead.");
-            animal.setAnimalStatus(AnimalStatus.DEAD);
+            this.setAnimalStatus(AnimalStatus.DEAD);
         }
-
-        return animal;
     }
 
     /**
@@ -126,16 +115,14 @@ public abstract class AbstractAnimal {
      * Sets time to sleep.
      * Decreases time to eat.
      *
-     * @param animal - animal to sleep
      * @return animal after sleeping
      */
-    public AbstractAnimal sleep(AbstractAnimal animal){
-        int eatingTime = random.nextInt(animal.getTimeToEat());
+    public void sleep(){
+        int eatingTime = random.nextInt(this.getTimeToEat());
         int sleepingTime = random.nextInt(10);  //10 - max value for sleeping. TODO: think how to avoid using number
 
-        animal.setTimeToSleep(sleepingTime);
-        animal.setTimeToEat(getTimeToEat() - eatingTime);
+        this.setTimeToSleep(sleepingTime);
+        this.setTimeToEat(getTimeToEat() - eatingTime);
 
-        return animal;
     }
 }

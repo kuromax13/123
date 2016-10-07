@@ -33,18 +33,23 @@ public class Raccoon extends AbstractAnimal {
      */
     public Cage emulateAction(Raccoon animal, Cage cage) {
         if (animal.getTimeToEat() < MIN_TIME_TO_EAT){
-            animal.findFood(animal, cage);
+            animal.findFood(cage);
 
             if (animal.getTimeToSleep() <= MIN_TIME_TO_SLEEP) {
-                animal.sleep(animal);
+                animal.sleep();
             }
         } else {
-            animal.move(animal);
+            animal.move();
         }
 
         return cage;
     }
 
+    public void rinse(Cage cage){
+        int foodToEat = random.nextInt(cage.getFoodCapacity());
+
+        this.setTimeToEat(this.getTimeToEat() - foodToEat);
+    }
 
 
 

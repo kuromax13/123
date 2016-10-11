@@ -125,4 +125,6 @@ public abstract class AbstractAnimal {
         this.setTimeToEat(getTimeToEat() - eatingTime);
 
     }
+
+    public abstract void emulateAction(Cage cage);
 }

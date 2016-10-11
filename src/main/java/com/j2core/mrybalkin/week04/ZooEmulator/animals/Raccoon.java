@@ -17,40 +17,38 @@ public class Raccoon extends AbstractAnimal {
     private Random random = new Random();
     private static Logger logger = Logger.getLogger(Raccoon.class.getName());
 
-    public Raccoon(String name, int timeToEat, int timeToSleep, AnimalStatus animalStatus){
+    public Raccoon(String name, int timeToEat, int timeToSleep){
         this.name = name;
         this.timeToEat = timeToEat;
         this.timeToSleep = timeToSleep;
-        this.animalStatus = animalStatus;
+        this.animalStatus = AnimalStatus.ALIVE;
     }
 
     /**
      * Emulates animal's actions
      *
-     * @param animal - animal to emulate
      * @param cage - in which cage animal is
      * @return cage with animal
      */
-    public Cage emulateAction(Raccoon animal, Cage cage) {
-        if (animal.getTimeToEat() < MIN_TIME_TO_EAT){
-            animal.findFood(cage);
+    public void emulateAction(Cage cage) {
+        if (this.getTimeToEat() < MIN_TIME_TO_EAT){
+            this.findFood(cage);
 
-            if (animal.getTimeToSleep() <= MIN_TIME_TO_SLEEP) {
-                animal.sleep();
+            if (this.getTimeToSleep() <= MIN_TIME_TO_SLEEP) {
+                this.sleep();
+            } else {
+                this.rinse(cage);
             }
         } else {
-            animal.move();
+            this.move();
         }
-
-        return cage;
     }
 
     public void rinse(Cage cage){
         int foodToEat = random.nextInt(cage.getFoodCapacity());
+        int sleepingTime = random.nextInt(this.getTimeToSleep());
 
         this.setTimeToEat(this.getTimeToEat() - foodToEat);
+        this.setTimeToSleep(getTimeToSleep() - sleepingTime);
     }
-
-
-
 }
